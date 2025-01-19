@@ -64,10 +64,28 @@ async function destroyAirplane(id) {
     }
 }
 
+
+async function updateAirplane(id, data) {
+    try {
+        console.log("inside airplane-service");
+        const response = await airplaneRepository.update(id, data);
+        return response;
+    } catch (error) {
+        if(error.statusCode == StatusCodes.NOT_FOUND) {
+            throw new AppError('the airplane you requested to delete is not present', error.statusCode);
+        }
+        throw new AppError(
+            "can not create a new airplane object",
+            StatusCodes.INTERNAL_SERVER_ERROR
+        );
+    }
+}
+
 module.exports = 
 {
     createAirplane,
     getAirplanes,
     getAirplane,
-    destroyAirplane
+    destroyAirplane,
+    updateAirplane
 };

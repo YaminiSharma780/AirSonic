@@ -36,12 +36,18 @@ class CrudRepository {
         return response;
     }
     async update(id, data){
-        const response = await this.model.update(data,{
+        console.log("inside update() crud-repository");
+        const response1 = await this.model.findByPk(id);
+        if(!response1){
+            throw new AppError("sorry! not found any resource to fetch", StatusCodes.NOT_FOUND);
+        }
+        const response2 = await this.model.update(data,{
             where:{
                 id: id
             }
         });
-        return response;
+        console.log("update response : ", response2);
+        return response2;
     }
 }
 module.exports = CrudRepository;
