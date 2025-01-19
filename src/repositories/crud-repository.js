@@ -1,4 +1,7 @@
 const {Logger} = require('../config');
+const AppError = require('../utils/errors/app-error');
+const {StatusCodes} = require('http-status-codes');
+
 class CrudRepository {
     constructor(model){
         this.model=model;
@@ -14,11 +17,17 @@ class CrudRepository {
                 id: data
             }
         });
+        if(!response){
+            throw new AppError("sorry! not found any resource to delete", StatusCodes.NOT_FOUND);
+        }
         return response;
     }
     async get(data){
         console.log("inside get() crud-repository");
         const response = await this.model.findByPk(data);
+        if(!response){
+            throw new AppError("sorry! not found any resource to fetch", StatusCodes.NOT_FOUND);
+        }
         return response;
     }
     async getAll(){
