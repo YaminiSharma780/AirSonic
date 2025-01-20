@@ -15,22 +15,7 @@ app.use(express.urlencoded({
 
 app.use('/api', apiRoutes);
 
-app.listen(ServerConfig.PORT, async()=>{
+app.listen(ServerConfig.PORT, ()=>{
     console.log(`server is listening at port : ${ServerConfig.PORT}`);
     // Logger.info("successfully started the server", {});
-
-    // TEST CODE
-    const { City, Airport } = require('./models');
-    // BELOW CODE DELETED record from cities table & associated airport with that city from airports table where id=11
-    // await City.destroy({
-    //     where: {
-    //         id: 11
-    //     }
-    // });
-    // BELOW CODE INSERTED record in airports table & associated it with cities table where id=11
-    // const city = await City.findByPk(11);
-    // await city.createAirport({
-    //     name: 'Sardar Vallabhbhai Patel International Airport',
-    //     code: 'AMD'
-    // });
 });
