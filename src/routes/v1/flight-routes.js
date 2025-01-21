@@ -14,15 +14,19 @@ router.post('/',
     FlightController.createFlight);
 
 // GET: /api/v1/flights
-router.get('/', FlightController.getFlights);
+// router.get('/', FlightController.getFlights);
 
-// /api/v1/flights/:id GET
-router.get('/:id', FlightController.getFlight);
+// // /api/v1/flights/:id GET
+// router.get('/:id', FlightController.getFlight);
 
 // /api/v1/flights/:id DELETE
 router.delete('/:id', FlightController.destroyFlight);
 
 // /api/v1/flights/:id UPDATE (PATCH)
 router.patch('/:id', FlightController.updateFlight);
+
+// QUERY PARAMS ROUTE
+// GET: /api/v1/flights?trips=MUM-DEL
+router.get('/', FlightController.getAllFlights);
 
 module.exports = router;
